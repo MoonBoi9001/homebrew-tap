@@ -5,15 +5,7 @@ Security-hardened macOS battery management CLI.
 ## Installation
 
 ```bash
-brew tap MoonBoi9001/apple-juice
-brew install apple-juice
-```
-
-## Post-install
-
-Run the setup command:
-
-```bash
+brew install MoonBoi9001/tap/apple-juice
 sudo battery visudo $USER
 ```
 
