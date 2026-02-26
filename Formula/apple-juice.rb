@@ -1,15 +1,15 @@
 class AppleJuice < Formula
   desc "Security-hardened macOS battery management CLI"
   homepage "https://github.com/MoonBoi9001/apple-juice"
-  url "https://github.com/MoonBoi9001/apple-juice/archive/refs/tags/v2.0.28.tar.gz"
-  sha256 "1de7231840785734f3961d368eeefcb0da7fe9b3fbfeb463bcc951bda0df4bf8"
+  url "https://github.com/MoonBoi9001/apple-juice/archive/refs/tags/v2.0.29.tar.gz"
+  sha256 "0be1892809610363f5bcbe639223200abc0d187bd99522baa726ce081aab51da"
   license "MIT"
 
   depends_on :macos
 
   def install
-    # Install main battery script
-    bin.install "battery.sh" => "battery"
+    # Install main script as apple-juice
+    bin.install "battery.sh" => "apple-juice"
 
     # Install smc binary based on architecture
     if Hardware::CPU.arm?
@@ -31,7 +31,7 @@ class AppleJuice < Formula
   def caveats
     <<~EOS
       To complete setup, run:
-        sudo battery visudo $USER
+        sudo apple-juice visudo $USER
 
       Then configure macOS settings:
         1. System Settings → Battery → Battery Health → Disable "Optimize Battery Charging"
@@ -39,11 +39,11 @@ class AppleJuice < Formula
         3. System Settings → Notifications → Script Editor → Select "Alerts"
 
       Start with:
-        battery maintain longevity
+        apple-juice maintain longevity
     EOS
   end
 
   test do
-    assert_match "Battery CLI utility", shell_output("#{bin}/battery help 2>&1", 0)
+    assert_match "Battery CLI utility", shell_output("#{bin}/apple-juice help 2>&1", 0)
   end
 end

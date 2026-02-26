@@ -6,13 +6,13 @@ Security-hardened macOS battery management CLI.
 
 ```bash
 brew install MoonBoi9001/tap/apple-juice
-sudo battery visudo $USER
+sudo apple-juice visudo $USER
 ```
 
 Then start managing your battery:
 
 ```bash
-battery maintain longevity
+apple-juice maintain longevity
 ```
 
 ## More info
