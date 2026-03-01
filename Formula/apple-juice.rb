@@ -1,35 +1,31 @@
 class AppleJuice < Formula
   desc "Security-hardened macOS battery management CLI"
   homepage "https://github.com/MoonBoi9001/apple-juice"
-  url "https://github.com/MoonBoi9001/apple-juice/archive/refs/tags/v1.0.2.tar.gz"
-  sha256 "1c65a2e67dcdef0667d5f97138e42ea46142a94417ed7872c76888cbe3328951"
+  version "2.0.0"
   license "MIT"
 
+  url "https://github.com/MoonBoi9001/apple-juice/releases/download/v2.0.0/apple-juice-v2.0.0-arm64.tar.gz"
+  sha256 "bf871c8cc61d08097fbbdb6eb7253c27603393a24cfa237ff589850ee17524a7"
+
   depends_on :macos
+  depends_on arch: :arm64
 
   def install
-    # Install main script as apple-juice
-    bin.install "apple-juice.sh" => "apple-juice"
+    bin.install "apple-juice"
+    bin.install "smc"
+  end
 
-    # Install smc binary based on architecture
-    if Hardware::CPU.arm?
-      bin.install "dist/smc"
-    else
-      bin.install "dist/smc_intel" => "smc"
-    end
-
-    # Install support files
-    (share/"apple-juice").install "dist/notification_permission.scpt"
-    (share/"apple-juice").install "dist/apple-juice_shutdown.plist"
-    (share/"apple-juice").install "dist/shutdown.sh"
-    (share/"apple-juice").install "dist/.sleep" if File.exist?("dist/.sleep")
-    (share/"apple-juice").install "dist/.wakeup" if File.exist?("dist/.wakeup")
-    (share/"apple-juice").install "dist/.reboot" if File.exist?("dist/.reboot")
-    (share/"apple-juice").install "dist/.shutdown" if File.exist?("dist/.shutdown")
+  service do
+    run [opt_bin/"apple-juice", "maintain-daemon", "recover"]
+    keep_alive crashed: true
+    log_path var/"log/apple-juice.log"
+    error_log_path var/"log/apple-juice.log"
   end
 
   def caveats
     <<~EOS
+      apple-juice requires Apple Silicon (M1 or later).
+
       To complete setup, run:
         sudo apple-juice visudo $USER
 
@@ -39,11 +35,14 @@ class AppleJuice < Formula
         3. System Settings > Notifications > Script Editor > Select "Alerts"
 
       Start with:
-        apple-juice maintain 80
+        apple-juice maintain longevity
+
+      To uninstall, always run this BEFORE brew uninstall:
+        apple-juice uninstall
     EOS
   end
 
   test do
-    assert_match "apple-juice CLI", shell_output("#{bin}/apple-juice help 2>&1", 0)
+    assert_match "apple-juice CLI", shell_output("#{bin}/apple-juice --version")
   end
 end
