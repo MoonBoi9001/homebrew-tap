@@ -27,7 +27,7 @@ class AppleJuice < Formula
       apple-juice requires Apple Silicon (M1 or later).
 
       To complete setup, run:
-        sudo apple-juice visudo $USER
+        sudo apple-juice visudo
 
       Then configure macOS settings:
         1. System Settings > Battery > Battery Health > Disable "Optimize Battery Charging"
