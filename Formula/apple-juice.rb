@@ -5,7 +5,7 @@ class AppleJuice < Formula
   license "MIT"
 
   url "https://github.com/MoonBoi9001/apple-juice/releases/download/v2.0.6/apple-juice-v2.0.6-arm64.tar.gz"
-  sha256 "a3ab6028668b0ca3bd310fc3f781a0ee5bce52cc456de358102dc504f6fdd054"
+  sha256 "b33a4e6c85772ebeadaedf6937f13b73e7eac5f655b6591b0980b5e9366d41e2"
 
   depends_on :macos
   depends_on arch: :arm64
