@@ -1,11 +1,11 @@
 class AppleJuice < Formula
   desc "Security-hardened macOS battery management CLI"
   homepage "https://github.com/MoonBoi9001/apple-juice"
-  version "3.0.2"
+  version "3.0.3"
   license "MIT"
 
-  url "https://github.com/MoonBoi9001/apple-juice/releases/download/v3.0.2/apple-juice-v3.0.2-arm64.zip"
-  sha256 "b5536cdbab42f9c1c3260130401aee397edb273cc1067361507a61adb1a88375"
+  url "https://github.com/MoonBoi9001/apple-juice/releases/download/v3.0.3/apple-juice-v3.0.3-arm64.zip"
+  sha256 "c12927f9ba9498fec220f28197beedb4814da39127bc0bbc8a3bb6fc8048a373"
 
   depends_on :macos
   depends_on arch: :arm64
